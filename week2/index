@@ -1,0 +1,49 @@
+<?php
+/** Created by PhpStorm. **/
+
+$men = array('Michael', 'Jack', 'John');
+$women = array('Sarah', 'Jill', 'Rachel');
+
+print $men[1]; //prints Jack
+
+$classes = array(); //$classes = [] does the same thing
+$classes['631'] = array('name' => 'Agile CMS', 'room' => '2255');
+$classes['634'] = array('name' => 'CMS build', 'room' => '2245');
+$classes['635'] = array('name' => 'CMS code', 'room' => '2299');
+$totalgpa = 0;
+//print $classes['631']['room']; //prints room # of the element '631'
+
+foreach ($classes as $cat=>$class) { //$cat=> is the category name, acts as the key of the array
+    //$key=>$value
+    print "Cat number " . $cat;
+    print "Name " . $class['name'];
+    print "Room " . $class['room'];
+
+    $gradenum = randomgpa();
+    $totalgpa = $totalgpa + $gradenum;
+    $classes[$cat]['gpa'] = gpatext($gradenum);
+    print "<HR>";
+}
+
+var_dump($classes);
+print "<h2> Average GPA = " . ($totalgpa/count($classes)) . "<h2>";
+
+
+function randomgpa() {
+    $gradenum = rand(1, 12);
+    return $gradenum;
+}
+
+function gpatext($gradenum) {
+    if ($gradenum == 12) {$grade = "A+";}
+    if ($gradenum == 11) {$grade = "A";}
+    if ($gradenum == 10) {$grade = "A-";}
+    if ($gradenum == 9) {$grade = "B+";}
+    if ($gradenum == 8) {$grade = "B";}
+    if ($gradenum == 7) {$grade = "B-";}
+    if ($gradenum == 6) {$grade = "C+";}
+    if ($gradenum == 5) {$grade = "C";}
+    if ($gradenum < 5) {$grade = "F";}
+    return $grade;
+
+}
